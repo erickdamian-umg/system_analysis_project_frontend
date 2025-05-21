@@ -43,8 +43,8 @@ const ClientList = () => {
         rowsPerPage,
         search
       );
-      setClients(response.clients);
-      setTotalClients(response.pagination.total);
+      setClients(Array.isArray(response) ? response : []);
+      setTotalClients(Array.isArray(response) ? response.length : 0);
     } catch (error) {
       if (error.response?.status === 401) {
         logout();
@@ -131,24 +131,32 @@ const ClientList = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {clients.map((client) => (
-                <TableRow key={client.id}>
-                  <TableCell>{client.name}</TableCell>
-                  <TableCell>{client.email}</TableCell>
-                  <TableCell>{client.phone}</TableCell>
-                  <TableCell>{client.address}</TableCell>
-                  <TableCell>
-                    <IconButton
-                      onClick={() => navigate(`/clients/${client.id}/edit`)}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton onClick={() => handleDeleteClick(client)}>
-                      <DeleteIcon />
-                    </IconButton>
+              {clients.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={5} align="center">
+                    No clients found
                   </TableCell>
                 </TableRow>
-              ))}
+              ) : (
+                clients.map((client) => (
+                  <TableRow key={client.id}>
+                    <TableCell>{client.name}</TableCell>
+                    <TableCell>{client.email}</TableCell>
+                    <TableCell>{client.phone}</TableCell>
+                    <TableCell>{client.address}</TableCell>
+                    <TableCell>
+                      <IconButton
+                        onClick={() => navigate(`/clients/${client.id}/edit`)}
+                      >
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton onClick={() => handleDeleteClick(client)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </TableContainer>

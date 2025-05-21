@@ -58,6 +58,23 @@ const ClientEdit = () => {
     );
   }
 
+  if (!client) {
+    return (
+      <Container>
+        <Box sx={{ mt: 4 }}>
+          <Button
+            startIcon={<ArrowBackIcon />}
+            onClick={() => navigate('/clients')}
+            sx={{ mb: 2 }}
+          >
+            Back to Clients
+          </Button>
+          <Typography color="error">Client not found</Typography>
+        </Box>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <Box sx={{ mt: 4, mb: 4 }}>
