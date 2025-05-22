@@ -11,24 +11,10 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      // Verify token is still valid
-      axios.get(`${API_URL}/auth/verify`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-        .then(response => {
-          setUser({ ...response.data, token });
-        })
-        .catch(() => {
-          // Token is invalid or expired
-          localStorage.removeItem('token');
-          setUser(null);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
+      // Set user from token
+      setUser({ token });
     }
+    setLoading(false);
   }, []);
 
   const login = async (email, password) => {

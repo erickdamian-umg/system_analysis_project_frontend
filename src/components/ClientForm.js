@@ -18,7 +18,8 @@ const validationSchema = Yup.object({
     /^[0-9+\-\s()]*$/,
     'Invalid phone number'
   ),
-  address: Yup.string()
+  address: Yup.string(),
+  company: Yup.string()
 });
 
 const ClientForm = ({ initialValues, onSubmit, error }) => {
@@ -27,7 +28,8 @@ const ClientForm = ({ initialValues, onSubmit, error }) => {
       name: '',
       email: '',
       phone: '',
-      address: ''
+      address: '',
+      company: ''
     },
     validationSchema,
     onSubmit: (values) => {
@@ -77,6 +79,18 @@ const ClientForm = ({ initialValues, onSubmit, error }) => {
             onChange={formik.handleChange}
             error={formik.touched.phone && Boolean(formik.errors.phone)}
             helperText={formik.touched.phone && formik.errors.phone}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            id="company"
+            name="company"
+            label="Company"
+            value={formik.values.company}
+            onChange={formik.handleChange}
+            error={formik.touched.company && Boolean(formik.errors.company)}
+            helperText={formik.touched.company && formik.errors.company}
           />
         </Grid>
         <Grid item xs={12}>

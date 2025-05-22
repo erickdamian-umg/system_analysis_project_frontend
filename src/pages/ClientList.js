@@ -106,7 +106,7 @@ const ClientList = () => {
 
         <TextField
           fullWidth
-          label="Search clients"
+          label="Search clients (name, email, company)"
           variant="outlined"
           value={search}
           onChange={handleSearch}
@@ -126,6 +126,7 @@ const ClientList = () => {
                 <TableCell>Name</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell>Phone</TableCell>
+                <TableCell>Company</TableCell>
                 <TableCell>Address</TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>
@@ -133,7 +134,7 @@ const ClientList = () => {
             <TableBody>
               {clients.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} align="center">
+                  <TableCell colSpan={6} align="center">
                     No clients found
                   </TableCell>
                 </TableRow>
@@ -143,6 +144,7 @@ const ClientList = () => {
                     <TableCell>{client.name}</TableCell>
                     <TableCell>{client.email}</TableCell>
                     <TableCell>{client.phone}</TableCell>
+                    <TableCell>{client.company}</TableCell>
                     <TableCell>{client.address}</TableCell>
                     <TableCell>
                       <IconButton

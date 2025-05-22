@@ -24,9 +24,10 @@ const handleError = (error) => {
 export const clientService = {
   async getClients(page = 1, limit = 10, search = '') {
     try {
-      const response = await axios.get(`${API_URL}/clients`, {
+      const endpoint = search ? '/clients/search' : '/clients';
+      const response = await axios.get(`${API_URL}${endpoint}`, {
         headers: getAuthHeader(),
-        params: { page, limit, search }
+        params: search ? { q: search } : { page, limit }
       });
       return response.data;
     } catch (error) {
